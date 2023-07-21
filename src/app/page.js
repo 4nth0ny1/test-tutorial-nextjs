@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import AddTodo from "../components/AddTodo";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
   const [index, setIndex] = useState(0);
 
   const addTodo = (newTodo) => {
     setIndex(() => index + 1);
     setTodos([...todos, { id: index, content: newTodo }]);
-    setInput("");
   };
 
   const deleteTodo = (id) => {
@@ -22,16 +21,7 @@ export default function Home() {
   return (
     <div>
       <h1>nextjs testing tutorial</h1>
-      <div>
-        <input
-          data-testid="todoInput"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button data-testid="addTodoButton" onClick={() => addTodo(input)}>
-          add todo
-        </button>
-      </div>
+      <AddTodo addClick={addTodo} />
       <div data-testid="todoList">
         {todos.map((todo) => {
           return (
